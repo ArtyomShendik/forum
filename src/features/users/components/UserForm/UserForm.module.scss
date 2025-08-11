@@ -1,0 +1,66 @@
+.user-form {
+  padding: 8px;
+}
+
+.form {
+  .ant-form-item {
+    margin-bottom: 20px;
+  }
+
+  .ant-form-item-label {
+    font-weight: 500;
+    color: #262626;
+    font-size: 14px;
+  }
+
+  .ant-input {
+    border-radius: 6px;
+    font-size: 14px;
+
+    &:hover {
+      border-color: #40a9ff;
+    }
+
+    &:focus {
+      border-color: #1890ff;
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+    }
+  }
+
+  .ant-picker {
+    border-radius: 6px;
+
+    &:hover {
+      border-color: #40a9ff;
+    }
+
+    &:focus {
+      border-color: #1890ff;
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+    }
+  }
+}
+
+.form-actions {
+  margin-bottom: 0;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.submit-button {
+  min-width: 120px;
+  height: 40px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.cancel-button {
+  height: 40px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+}
