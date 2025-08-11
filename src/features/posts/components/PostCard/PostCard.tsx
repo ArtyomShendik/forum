@@ -3,14 +3,18 @@ import type { Post } from '../../../../types/post';
 import { useNavigate } from 'react-router-dom';
 import { useDeletePost } from '../../hooks/useDeletePost';
 import styles from './PostCard.module.scss';
+import { useFavoritesPosts } from '../../../../store/favorites.store';
 
 interface Props {
   post: Post;
+  isSingle?: boolean;
 }
 
-export const PostCard = ({ post }: Props) => {
+export const PostCard = ({ post, isSingle }: Props) => {
   const navigate = useNavigate();
   const { mutate: deletePost, isPending } = useDeletePost();
+  const { addFavoritePost, removeFavoritePost, isFavoritePost } =
+    useFavoritesPosts();
 
   const handleNavigate = (id: number) => {
     navigate(`/posts/${id}`);
@@ -20,12 +24,26 @@ export const PostCard = ({ post }: Props) => {
     deletePost(id);
   };
 
+  const handleAddToFavorites = () => {
+    addFavoritePost(post);
+  };
+
   return (
     <Card title={post.title}>
       <p>{post.body}</p>
       <div className={styles['post-card__actions']}>
-        <Button>Избранное</Button>
-        <Button onClick={() => handleNavigate(post.id)}>Подробнее</Button>
+        {isFavoritePost(post.id) ? (
+          <Button onClick={() => removeFavoritePost(post.id)}>
+            Удалить из избранного
+          </Button>
+        ) : (
+          <Button onClick={() => handleAddToFavorites()}>
+            Добавить в ибранное
+          </Button>
+        )}
+        {!isSingle && (
+          <Button onClick={() => handleNavigate(post.id)}>Подробнее</Button>
+        )}
         <Popconfirm
           title="Удалить пост?"
           description="Это действие нельзя отменить"
@@ -33,9 +51,11 @@ export const PostCard = ({ post }: Props) => {
           okText="Да"
           cancelText="Нет"
         >
-          <Button danger loading={isPending}>
-            Удалить
-          </Button>
+          {!isSingle && (
+            <Button danger loading={isPending}>
+              Удалить
+            </Button>
+          )}
         </Popconfirm>
       </div>
     </Card>
