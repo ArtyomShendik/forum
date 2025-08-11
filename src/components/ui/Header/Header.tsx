@@ -7,6 +7,7 @@ export const Header: FC = () => {
   const navigationItems = [
     { path: '/', title: 'Главная' },
     { path: '/profile', title: 'Профиль' },
+    { path: '/favorites', title: 'Избранное' },
   ];
 
   return (
